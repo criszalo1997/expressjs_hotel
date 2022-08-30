@@ -15,6 +15,16 @@ exports.findAll = function (req, res) {
         res.send(reserva);
     });
 };
+
+exports.findAlldelete = function (req, res) {
+    Reserva.findAlldelete(function (err, reserva) {
+        console.log('controller')
+        if (err)
+            res.send(err);
+        console.log('res', reserva);
+        res.send(reserva);
+    });
+};
 exports.create = function (req, res) {
     const new_reserva = new Reserva(req.body);
     //handles null error
@@ -71,10 +81,9 @@ exports.update = function (req, res) {
 
 exports.delete = function (req, res) {
     Reserva.delete(req.params.id, function (err, reserva) {
-        if (err)
+        if (err){
             res.send(err);
-        
-        if (reserva.affectedRows > 0) {
+        }else if (reserva > 0) {
             res.json({ error: false, message: 'Reserva eliminada correctamente' });
         }else{
             res.status(400).send({ error: true, message: 'Reserva no eliminada fuera de rango' });

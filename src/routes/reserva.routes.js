@@ -3,6 +3,8 @@ const router = express.Router()
 const reservaController = require('../controllers/reserva.controller');
 // retornar todas las habitaciones
 router.get('/', reservaController.findAll);
+// retornar todas las habitaciones ELIMINADAS
+router.get('/eliminadas/', reservaController.findAlldelete);
 // crear nueva habitacion
 router.post('/', reservaController.create);
 // regresar una habitacion con id

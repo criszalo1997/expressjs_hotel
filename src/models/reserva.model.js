@@ -107,6 +107,19 @@ Reserva.findAll = function (result) {
     });
 };
 
+Reserva.findAlldelete = function (result) {
+    dbConn.query("Select reservaciones.*, clientes.nombre as cliente  from reservaciones join clientes on reservaciones.cliente_id = clientes.id where reservaciones.estado = 'ELIMINADO'", function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            console.log('reservaciones : ', res);
+            result(null, res);
+        }
+    });
+};
+
 Reserva.update = function (id, reserva, result) {
     dbConn.query("UPDATE reservaciones SET fechaini=?, fechafin=?, met_pago=?, estado=?, pago=?, habitacion_id=?, cliente_id=?, updated_at=? WHERE id = ?",
         [reserva.fechaini, reserva.fechafin, reserva.met_pago, reserva.estado, reserva.pago, reserva.habitacion_id, reserva.cliente_id, new Date(), id],
@@ -146,7 +159,7 @@ Reserva.to_pay = function (id, reserva, result) {
 
 
 Reserva.delete = function (id, result) {
-    dbConn.query("DELETE FROM reservaciones WHERE ? NOT BETWEEN reservaciones.fechaini and reservaciones.fechafin AND id = ?  ", [new Date(), id], function (err, res) {
+    dbConn.query("UPDATE reservaciones SET estado ='ELIMINADO' WHERE ? NOT BETWEEN reservaciones.fechaini and reservaciones.fechafin AND id = ?", [new Date(), id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
