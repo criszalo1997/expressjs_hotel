@@ -1,6 +1,9 @@
 'use strict';
 var dbConn = require('./../../config/db.config');
 //Habitacion object create
+const ESTADOS = [
+    "Disponible", "No Disponible"
+]
 var Habitacion = function (habitacion) {
     this.numero = habitacion.numero;
     this.estado = habitacion.estado ? habitacion.estado : 'Disponible';

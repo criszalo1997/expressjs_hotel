@@ -22,6 +22,13 @@ const clientesRutas = require('./src/routes/cliente.routes')
 // usando un middleware
 app.use('/api/v1/clientes', clientesRutas)
 
+// rutas reservas
+const reservasRutas = require('./src/routes/reserva.routes')
+// usando un middleware
+app.use('/api/v1/reservas', reservasRutas)
+
+
+
 
 
 // listar peticiones
