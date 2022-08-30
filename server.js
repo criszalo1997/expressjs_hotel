@@ -17,6 +17,12 @@ const habitacionesRutas = require('./src/routes/habitacion.routes')
 // usando un middleware
 app.use('/api/v1/habitaciones', habitacionesRutas)
 
+// rutas clientes
+const clientesRutas = require('./src/routes/cliente.routes')
+// usando un middleware
+app.use('/api/v1/clientes', clientesRutas)
+
+
 
 // listar peticiones
 app.listen(port, () => {
